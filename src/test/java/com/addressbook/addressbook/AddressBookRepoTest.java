@@ -18,8 +18,8 @@ public class AddressBookRepoTest {
     public void testStoreAndRetrieveAddressBook() {
         // Create a new AddressBook
         AddressBook ab = new AddressBook();
-        ab.addBuddy("John Doe", "123-456-7890");
-        ab.addBuddy("Jane Smith", "098-765-4321");
+        ab.addBuddy("John Doe", "123-456-7890", "1 madeupway");
+        ab.addBuddy("Jane Smith", "098-765-4321", "2 madeupway");
 
         // Save it
         AddressBook savedAB = addressBookRepo.save(ab);

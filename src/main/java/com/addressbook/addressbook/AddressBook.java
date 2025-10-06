@@ -27,8 +27,13 @@ public class AddressBook {
         return this.id;
     }
 
-    public void addBuddy(String name, String number){
-        BuddyInfo buddy = new BuddyInfo(name, number);
+    public void addBuddy(String name, String number, String address){
+        BuddyInfo buddy = new BuddyInfo(name, number, address);
+        buddy.setAddressBook(this);
+        buddyInfos.add(buddy);
+    }
+
+    public void addBuddy(BuddyInfo buddy){
         buddy.setAddressBook(this);
         buddyInfos.add(buddy);
     }
@@ -57,7 +62,7 @@ public class AddressBook {
         StringBuilder retStr = new StringBuilder();
         retStr.append("ID: " + this.getId());
         for(BuddyInfo b : buddyInfos){
-            retStr.append("Name: " + b.getName() + " #: " + b.getNumber() + "\n");
+            retStr.append("Name: " + b.getName() + " #: " + b.getNumber() +  " Address: " + b.getAddress() + "\n");
         }
         return retStr.toString();
     }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class BuddyInfo implements Serializable {
     private String name;
     private String number;
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "addressbook_id")
@@ -20,11 +21,13 @@ public class BuddyInfo implements Serializable {
     BuddyInfo(){
         this.name = null;
         this.number = null;
+        this.address = null;
     }
 
-    BuddyInfo(String inputName, String inputNumber){
+    BuddyInfo(String inputName, String inputNumber, String inputAddress){
         this.name = inputName;
         this.number = inputNumber;
+        this.address = inputAddress;
     }
 
     public void setAddressBook(AddressBook ab){
@@ -50,5 +53,9 @@ public class BuddyInfo implements Serializable {
     public void setName(String name){this.name = name;}
 
     public void setNumber(String number){this.number = number;}
+
+    public void setAddress(String address) {this.address = address;}
+
+    public String getAddress() {return this.address;}
 
 }

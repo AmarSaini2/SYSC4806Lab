@@ -42,7 +42,7 @@ public class AddressBookController {
         Optional<AddressBook> addressBookPull = repo.findByIdWithBuddyInfos(id);
         if(addressBookPull.isPresent()){
             AddressBook addressBook = addressBookPull.get();
-            addressBook.addBuddy(newBuddy.getName(), newBuddy.getNumber());
+            addressBook.addBuddy(newBuddy.getName(), newBuddy.getNumber(), newBuddy.getAddress());
             repo.save(addressBook);
             String returnString = "redirect:/addressbook/%d".formatted(addressBook.getId());
             return returnString;
