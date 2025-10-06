@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>AddressBook by ID</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            text-align: left;
+        }
+
+        .form-section {
+            width: 48%;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+        }
+
+        ul {
+            margin-top: 2rem;
+
+        }
+    </style>
+</head>
+<body>
+    <div th:if="${addressbook != null}">
+        <h2>AddressBook ID: <span th:text="${addressbook.getId}"></span></h2>
+
+        <div class ="container">
+            <div class="form-selection">
+                <h3>Add BuddyInfo</h3>
+                <form th:action="@{/addressbook/{id}(id=${addressbook.getId})}"
+                      th:object="${newBuddy}"
+                      th:method="post">
+
+                    <p>Name: <input type="text" th:field="*{name}"/></p>
+                    <p>Number: <input type="text" th:field="*{number}"/></p>
+                    <p><input type="submit" value = "Add"/><input type="reset" value="Reset"/></p>
+                </form>
+            </div>
+            <div class="form-selection">
+                 <h3>Remove BuddyInfo</h3>
+            <form th:action="@{/addressbook/{id}/remove(id=${addressbook.getId})}"
+                  method="post">
+                <p>Buddy ID to Remove: <input type="number" name="buddyId" required/></p>
+                <p><input type="submit" value="Remove"/></p>
+            </form>
+            </div>
+        </div>
+        <div th:if="${addressbook.getBuddyCount == 0}">
+            <h3>No Buddy Infos...</h3>
+        </div>
+        <h3>BuddyInfos</h3>
+        <ul>
+            <li th:each="buddy : ${addressbook.getBuddyInfos}">
+                ID: <span th:text="${buddy.getId}"></span>, Name: <span th:text="${buddy.getName}"></span>, Number: <span th:text="${buddy.getNumber}"></span>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${addressbook == null}">
+        <p>AddressBook not found.</p>
+    </div>
+</body>
+</html>
