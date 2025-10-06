@@ -9,7 +9,7 @@
     <h2>AddressBook ID: <span th:text="${ab.getId}"></span></h2>
     <ul>
         <li th:each="buddy : ${ab.getBuddyInfos}">
-            Name: <span th:text="${buddy.getName}"></span>, Number: <span th:text="${buddy.getNumber}"></span>
+            ID: <span th:text="${buddy.getId}"></span>, Name: <span th:text="${buddy.getName}"></span>, Number: <span th:text="${buddy.getNumber}"></span>, Address: <span th:text="${buddy.getAddress}"></span>
         </li>
     </ul>
 </div>

@@ -25,12 +25,14 @@ public class AddressBookControllerIntegrationTest {
     private AddressBookRepo repo;
 
     private AddressBook addressBook;
+    private BuddyInfo buddy;
 
     @BeforeEach
     public void setup() {
         // Create an AddressBook with one BuddyInfo for testing
         addressBook = new AddressBook();
-        addressBook.addBuddy("John Doe", "123-456-7890");
+        buddy = new BuddyInfo("John Doe", "123-456-7890", "Frontenac House");
+        addressBook.addBuddy(buddy);
         repo.save(addressBook);
     }
 
@@ -52,7 +54,15 @@ public class AddressBookControllerIntegrationTest {
                 .andExpect(view().name("addressbookbyid"))
                 .andExpect(model().attributeExists("addressbook"))
                 .andExpect(model().attribute("addressbook", hasProperty("id", is(addressBook.getId()))))
-                .andExpect(model().attributeExists("newBuddy"));
+                .andExpect(model().attributeExists("newBuddy"))
+                .andExpect(model().attribute("addressbook", hasProperty("buddyInfos", containsInAnyOrder(
+                        allOf(
+                                hasProperty("name", is(buddy.getName())),
+                                hasProperty("id", is(buddy.getId())),
+                                hasProperty("number", is(buddy.getNumber())),
+                                hasProperty("address", is(buddy.getAddress()))
+                        )
+                ))));
     }
 
     @Test

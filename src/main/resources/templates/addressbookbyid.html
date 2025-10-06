@@ -40,6 +40,7 @@
 
                     <p>Name: <input type="text" th:field="*{name}"/></p>
                     <p>Number: <input type="text" th:field="*{number}"/></p>
+                    <p>Address: <input type="text" th:field="*{address}"/></p>
                     <p><input type="submit" value = "Add"/><input type="reset" value="Reset"/></p>
                 </form>
             </div>
@@ -58,7 +59,7 @@
         <h3>BuddyInfos</h3>
         <ul>
             <li th:each="buddy : ${addressbook.getBuddyInfos}">
-                ID: <span th:text="${buddy.getId}"></span>, Name: <span th:text="${buddy.getName}"></span>, Number: <span th:text="${buddy.getNumber}"></span>
+                ID: <span th:text="${buddy.getId}"></span>, Name: <span th:text="${buddy.getName}"></span>, Number: <span th:text="${buddy.getNumber}"></span>, Address: <span th:text="${buddy.getAddress}"></span>
             </li>
         </ul>
     </div>
