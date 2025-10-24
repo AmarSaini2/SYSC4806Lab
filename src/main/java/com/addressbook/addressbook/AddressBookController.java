@@ -27,14 +27,13 @@ public class AddressBookController {
 
     @GetMapping("/addressbook/{id}")
     public String addressBookById(@PathVariable Long id, Model model){
-        Optional<AddressBook> addressBook = repo.findByIdWithBuddyInfos(id);
-        if(addressBook.isPresent()){
-            model.addAttribute("addressbook", addressBook.get());
-            model.addAttribute("newBuddy", new BuddyInfo());
-            return "addressbookbyid";
-        }else{
-            return "addressbookbyid";
-        }
+        AddressBook addressBook = repo.findByIdWithBuddyInfos(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "AddressBook not found"));
+
+        System.out.println("Looking up AddressBook ID " + id);
+        model.addAttribute("addressbook", addressBook);
+        model.addAttribute("newBuddy", new BuddyInfo());
+        return "addressbookbyid";
     }
 
     @PostMapping("/addressbook/{id}")
